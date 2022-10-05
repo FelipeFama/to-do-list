@@ -68,6 +68,10 @@ button:hover {
   font-weight: bold;
 }
 
+.hide {
+ display: none;
+}
+
 .form-control {
   display: flex;
 }
@@ -75,6 +79,7 @@ button:hover {
 .form-control input {
   border-radius: 0.5rem;
   border: none;
+  font-size: 1rem;
   padding: 0.5rem;
   margin-right: 1rem;
   width: 12rem;
@@ -97,6 +102,8 @@ button:hover {
 
 #search input {
   border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
   margin-right: 1rem;
   padding: 0.5rem;
 }
