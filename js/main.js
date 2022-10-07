@@ -12,28 +12,30 @@ let oldInputValue;
 
 //Functions
 const saveTodo = (text) => {
-  const todo = document.createElement("div")
-  todo.classList.add("todo")
+  const todo = document.createElement("div");
+  todo.classList.add("todo");
 
-  const todoTitle = document.createElement("h4")
-  todoTitle.innerText = text
-  todo.appendChild(todoTitle)
+  const todoTitle = document.createElement("h4");
+  todoTitle.innerText = text;
+  todo.appendChild(todoTitle);
   
-  const doneBtn = document.createElement("button")
-  doneBtn.innerHTML = '<i class="fa-solid fa-check finish-todo"></i>'
-  todo.appendChild(doneBtn)
+  const doneBtn = document.createElement("button");
+  doneBtn.classList.add("finish-todo");
+  doneBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+  todo.appendChild(doneBtn);
 
-  const editBtn = document.createElement("button")
-  editBtn.innerHTML = '<i class="fa-solid fa-pen edit-todo"></i>'
-  todo.appendChild(editBtn)
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("edit-todo");
+  editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+  todo.appendChild(editBtn);
 
-  const deleteBtn = document.createElement("button")
-  deleteBtn.innerHTML = '<i class="fa-solid fa-xmark remove-todo"></i>'
-  todo.appendChild(deleteBtn)
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("remove-todo");
+  deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  todo.appendChild(deleteBtn);
   
-  taskList.appendChild(todo)
-
-  taskInput.value = ""
+  taskList.appendChild(todo);
+  taskInput.value = "";
 }
 
 const toggleForms = () => {
@@ -53,7 +55,53 @@ const updateTodo = (text) => {
     }
   });
 }
-//LocalStorage Data
+
+const getSearchedTodos = (search) => {
+  const todos = document.querySelectorAll(".todo");
+
+  todos.forEach((todo) => {
+    const todoTitle = todo.querySelector("h4").innerText.toLowerCase();
+
+    todo.style.display = "flex";
+    console.log(todoTitle)
+    
+    if(!todoTitle.includes(search)) {
+      todo.style.display = "none";
+    }
+  });
+};
+
+const filterTodos = (filterValue) => {
+  const todos = document.querySelectorAll(".todo");
+
+  switch (filterValue) {
+    case "all":
+      todos.forEach((todo) => (todo.style.display = "flex"));
+
+      break;
+
+    case "done":
+      todos.forEach((todo) =>
+       todo.classList.contains("done")
+         ? (todo.style.display = "flex")
+         : (todo.style.display = "none")
+      );
+
+      break;
+
+    case "todo":
+      todos.forEach((todo) =>
+       todo.classList.contains("done")
+         ? (todo.style.display = "flex")
+         : (todo.style.display = "none")
+      );
+
+      break;
+
+    default:
+     break;
+  }
+};
 
 //Events
 taskForm.addEventListener("submit", (e) => {
@@ -67,8 +115,8 @@ taskForm.addEventListener("submit", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-  const targetEl = e.target
-  const parentEl = targetEl.closest("div")
+  const targetEl = e.target;
+  const parentEl = targetEl.closest("div");
   let todoTitle;
 
   if(parentEl && parentEl.querySelector("h4")) {
@@ -76,25 +124,25 @@ document.addEventListener("click", (e) => {
   }
 
   if(targetEl.classList.contains("finish-todo")) {
-    parentEl.classList.toggle("done")
+    parentEl.classList.toggle("done");
   }
 
   if(targetEl.classList.contains("edit-todo")) {
-    toggleForms()
+    toggleForms();
 
     editInput.value = todoTitle;
     oldInputValue = todoTitle;
   }
  
   if(targetEl.classList.contains("remove-todo")) {
-    parentEl.remove()
+    parentEl.remove();
   }
 });
 
 cancelEditBtn.addEventListener("click" , (e) => {
   e.preventDefault();
   toggleForms();
-})
+});
 
 editForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -106,4 +154,23 @@ editForm.addEventListener("submit", (e) => {
   }
 
   toggleForms();
+});
+
+searchInput.addEventListener("keyup", (e) => {
+  const search = e.target.value;
+
+  getSearchedTodos(search);
+});
+
+eraseBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  searchInput.value = "";
+
+  searchInput.dispatchEvent(new Event("keyup"));
+});
+
+filterBtn.addEventListener("change", (e) => {
+  const filterValue = e.target.value;
+  filterTodos(filterValue);
 })

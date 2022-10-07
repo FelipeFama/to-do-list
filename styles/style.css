@@ -54,6 +54,7 @@ button:hover {
   padding: 0 1rem 1rem;
 }
 
+/*Forms*/
 #task-form,
 #edit-form,
 #toolbar {
@@ -94,6 +95,7 @@ button:hover {
   margin-top: 1rem;
 }
 
+/*search*/
 #search {
   display: flex;
   flex-direction: column;
@@ -126,7 +128,7 @@ button:hover {
   padding: 0.1rem;
 }
 
-/*task-list*/
+/*Task-list*/
 .todo {
   display: flex;
   align-items: center;
