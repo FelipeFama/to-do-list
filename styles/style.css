@@ -10,7 +10,7 @@
 
 body {
   background-image: url(../assets/background.png);
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-position: center;
   background-size: cover;
   color: #45B39D;
@@ -37,6 +37,12 @@ button:hover {
   color: #1D1B1A;
 }
 
+header {
+  color: #ccc;
+  text-align: center;
+  padding: 1rem 1rem 0;
+}
+
 .task-container {
   background-color: #1D1B1A;
   border-radius: 0.5rem;
@@ -46,12 +52,6 @@ button:hover {
   padding: 1.5rem;
   position: relative;
   top: 2rem;
-}
-
-.task-container header {
-  border-bottom: 1px solid #ccc;
-  text-align: center;
-  padding: 0 1rem 1rem;
 }
 
 /*Forms*/
